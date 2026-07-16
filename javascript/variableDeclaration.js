@@ -87,9 +87,16 @@ Uncaught SyntaxError: Missing initializer in const declaration
 學習疑問
 
 不是應該在 const i; 之前的都會正常運作嗎？為何全部都直接壞掉不運作？
-
 */
 
 // ===== 宣告並初始化 → console.log =====
 const j = 1;
 console.log(`這是屬於 j 的值${j}`);
+
+// ===== 重新賦值 =====
+// const k = 1;
+// k = 2;
+// Uncaught TypeError: Assignment to constant variable.
+
+console.log(l);
+// Uncaught ReferenceError: l is not defined
