@@ -69,48 +69,242 @@ console.log(Mar01_2026);
 ================================================
 */
 
-// 取得 Date 物件的年
+/*
+========================
+取得 Date 物件的本地時區的年
+========================
+*/
+
 let nowFullYear = now.getFullYear();
-console.log(`現在的年份為 ${nowFullYear}`);
-// 現在的年份為 2026
+console.log(`現在本地時區的年份為 ${nowFullYear}`);
+// 現在本地時區的年份為
 
-// 取得 Date 物件的月
+/*
+========================
+取得 Date 物件的UTC時區的年
+========================
+*/
+let nowUTCFullYear = now.getUTCFullYear();
+console.log(`現在UTC時區的年份為 ${nowUTCFullYear}`);
+
+/*
+========================
+取得 Date 物件的本地時區的月
+========================
+*/
+
 let nowMonth = now.getMonth();
-console.log(`現在的月份為 ${nowMonth}`);
-// 現在的月份為
+console.log(`現在本地時區的月份為 ${nowMonth}`);
+// 現在本地時區的月份為
 
-// 取得 Date 物件的日期
+/*
+========================
+取得 Date 物件的UTC時區的月
+========================
+*/
+
+let nowUTCMonth = now.getUTCMonth();
+console.log(`現在UTC時區的月份為 ${nowUTCMonth}`);
+// 現在UTC時區的月份為
+
+/*
+==========================
+取得 Date 物件的本地時區的日期
+==========================
+*/
+
 let nowDate = now.getDate();
-console.log(`現在的日期為 ${nowDate}`);
-// 現在的日期為
+console.log(`現在本地時區的日期為 ${nowDate}`);
+// 現在本地時區的日期為
 
-// 取得 Date 物件的小時
+/*
+=========================
+取得 Date 物件的UTC時區的日期
+=========================
+*/
+let nowUTCDate = now.getUTCDate();
+console.log(`現在UTC時區的日期為 ${nowUTCDate}`);
+// 現在UTC時區的日期為
+
+/*
+==========================
+取得 Date 物件的本地時區的星期
+==========================
+*/
+
+let nowDay = now.getDay();
+console.log(`現在本地時區的星期為 ${nowDay}`);
+// 現在本地時區的星期為
+
+/*
+=========================
+取得 Date 物件的UTC時區的星期
+=========================
+*/
+let nowUTCDay = now.getUTCDay();
+console.log(`現在UTC時區的星期為 ${nowUTCDay}`);
+// 現在UTC時區的星期為
+
+/*
+==========================
+取得 Date 物件的本地時區的小時
+==========================
+*/
+
 let nowHours = now.getHours();
-console.log(`現在的小時為 ${nowHours}`);
-// 現在的小時為
+console.log(`現在本地時區的小時為 ${nowHours}`);
+// 現在本地時區的小時為
 
-// 取得 Date 物件的分鐘
+/*
+=========================
+取得 Date 物件的UTC時區的小時
+=========================
+*/
+
+// 取得 Date 物件UTC時區的小時
+let nowUTCHours = now.getUTCHours();
+console.log(`現在UTC時區的小時為 ${nowUTCHours}`);
+// 現在UTC時區的小時為
+
+/*
+==========================
+取得 Date 物件的本地時區的分鐘
+==========================
+*/
+
 let nowMinutes = now.getMinutes();
-console.log(`現在的分鐘為 ${nowMinutes}`);
-// 現在的分鐘為
+console.log(`現在本地時區的分鐘為 ${nowMinutes}`);
+// 現在本地時區的分鐘為
 
-// 取得 Date 物件的秒數
+/*
+=========================
+取得 Date 物件的UTC時區的分鐘
+=========================
+*/
+let nowUTCMinutes = now.getUTCMinutes();
+console.log(`現在UTC時區的分鐘為 ${nowUTCMinutes}`);
+// 現在UTC時區的分鐘為
+
+/*
+==========================
+取得 Date 物件的本地時區的秒數
+==========================
+*/
+
 let nowSeconds = now.getSeconds();
-console.log(`現在的秒數為 ${nowSeconds}`);
-// 現在的秒數為
+console.log(`現在本地時區的秒數為 ${nowSeconds}`);
+// 現在本地時區的秒數為
 
-// 取得 Date 物件的毫秒
+/*
+=========================
+取得 Date 物件的UTC時區的秒
+=========================
+*/
+let nowUTCSeconds = now.getUTCSeconds();
+console.log(`現在UTC時區的秒數為 ${nowUTCSeconds}`);
+// 現在UTC時區的秒數為
+
+/*
+==========================
+取得 Date 物件的本地時區的毫秒
+==========================
+*/
+
 let nowMilliseconds = now.getMilliseconds();
-console.log(`現在的毫秒為 ${nowMilliseconds}`);
-// 現在的毫秒為
+console.log(`現在本地時區的毫秒為 ${nowMilliseconds}`);
+// 現在本地時區的毫秒為
 
-// 取得 Date 物件的從 UTC 起點到現在經過的毫秒
+/*
+=========================
+取得 Date 物件的UTC時區的毫秒
+=========================
+*/
+
+let nowUTCMilliseconds = now.getUTCMilliseconds();
+console.log(`現在UTC時區的毫秒為 ${nowUTCMilliseconds}`);
+// 現在UTC時區的毫秒為
+
+/*
+======================================
+取得 Date 物件的從 UTC 起點到現在經過的毫秒
+======================================
+*/
+
 // 從1970 年 1 月 1 日 UTC+0 到現在的時間搓 ( 毫秒數 )
 let nowTimestampFromUTC = now.getTime();
 console.log(`現在的毫秒為 ${nowTimestampFromUTC}`);
 // 經過的毫秒為
 
-// 取得 Date 物件的從 UTC 起點到現在經過的分鐘差
+/*
+========================================
+ 取得 Date 物件的從 UTC 起點到現在經過的分鐘差
+========================================
+*/
+
 let nowMinutesFromUTC = now.getTimezoneOffset();
 console.log(`現在的分鐘為 ${nowMinutesFromUTC}`);
 // 經過的分鐘差為
+
+/*
+================================================
+!!!!! 修改 Date 物件的日期、時間的 API !!!!!
+================================================
+*/
+
+let now2 = new Date();
+
+/*
+==================================
+setFullYear(year, [month], [date])
+==================================
+*/
+
+/*
+========================
+修改 Date 物件的本地時區的年
+========================
+*/
+
+let now2SetFullYear = now2.setFullYear(2027);
+console.log(`修改後的本地時區的年份為 ${now2SetFullYear}`);
+console.log(`修改後的本地時區的現在年份為 ${now2}`);
+// 修改後的本地時區的年份為
+
+/*
+========================
+修改 Date 物件的UTC時區的年
+========================
+*/
+let now2SetUTCFullYear = now2.setUTCFullYear(2027);
+console.log(`修改後的UTC時區的年份為 ${now2SetUTCFullYear}`);
+console.log(`修改後的UTC時區的現在年份為 ${now2}`);
+// 修改後的UTC時區的年份為
+
+/*
+=====================
+setMonth(month, date)
+=====================
+*/
+
+/*
+========================
+修改 Date 物件的本地時區的月
+========================
+*/
+
+let now2SetMonth = now2.setMonth(0);
+console.log(`修改後的本地時區的年份為 ${now2SetMonth}`);
+console.log(`修改後的本地時區的現在年份為 ${now2}`);
+// 修改後的本地時區的年份為
+
+/*
+========================
+修改 Date 物件的UTC時區的月
+========================
+*/
+let now2SetUTCMonth = now2.setUTCMonth(0);
+console.log(`修改後的UTC時區的年份為 ${now2SetUTCMonth}`);
+console.log(`修改後的UTC時區的現在年份為 ${now2}`);
+// 修改後的UTC時區的年份為
+
+// 其他更多set
