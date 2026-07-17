@@ -127,3 +127,50 @@ if (gender === "man") {
     console.log("這位女生體型正常");
   }
 }
+
+/*
+==========================
+!!!!! 巢狀 if 測量腰圍 !!!!!
+==========================
+*/
+
+/* 
+● 國、英、數成績分數。
+● 若考試成績總分超過(含)240，顯示去遊樂園。
+● 若考試成績總分低於240，顯示不去遊樂園。
+*/
+
+let chineseScore = 80;
+let englishScore = 90;
+let mathScore = 0;
+let passScore = 240;
+let totalScore = chineseScore + englishScore + mathScore;
+console.log(`考試成績總分為 ${totalScore}`);
+
+if (totalScore >= passScore) {
+  console.log("去遊樂園");
+} else if (totalScore < 240) {
+  console.log("不去遊樂園");
+}
+
+/*
+==========================
+!!!!! 巢狀 if 測量腰圍 !!!!!
+==========================
+*/
+
+/* 
+● 小美的心情分數。
+● 若心情分數超過(含)8，顯示去唱歌。
+● 若心情分數超過(含)5，顯示去血拼。
+● 若心情分數低於5，顯示什麼都不做。
+*/
+
+let meiMoodScore = -1;
+if (meiMoodScore >= 8) {
+  console.log("去唱歌");
+} else if (meiMoodScore >= 5) {
+  console.log("去血拼");
+} else if (meiMoodScore < 5) {
+  console.log("什麼都不做");
+}
