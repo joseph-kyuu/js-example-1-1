@@ -740,9 +740,238 @@ console.log(bikeStationData.data[2].BikesCapacity);
 
 let family = {
   isFamily: true,
-  motherName: Jane,
-  fatherName: Bill,
-  daughterName: Rosa,
-  sonName: Howard,
+  motherName: "Jane",
+  fatherName: "Bill",
+  daughterName: "Rosa",
+  sonName: "Howard",
   dogsName: ["Bobo", "Koko"],
 };
+
+/*
+==========================
+!!!!! 6.物件的屬性和值 !!!!!
+==========================
+*/
+
+/*
+描述一：販售版寫了一棟別墅的販售資訊
+描述二：內容是有一個建案，名稱叫做「六角大別墅」，地點在「高雄市」
+描述三：因為太豪華，所以這個建案只有「兩戶」
+
+第一戶資訊：
+價格：2 億 8 千萬
+坪數：900 坪
+是否有游泳池：無
+是否有地下室：有
+樓數：5 樓
+衛浴：3 衛
+專屬管家：無
+是否已被賣掉：有
+
+第二戶資訊：
+價格：3 億 2千萬
+坪數：1200 坪
+是否有游泳池：有
+是否有地下室：有
+樓數：7 樓
+衛浴：4 衛
+專屬管家：有
+是否已被賣掉：無
+*/
+
+let building = {
+  name: "hexBuilding",
+  location: "Kaohsiung",
+  household: [
+    {
+      householdName: "first",
+      price: " 2 億 8千萬",
+      pings: "900坪",
+      hasPool: false,
+      hasBasement: true,
+      floors: 5,
+      bathRoom: 3,
+      hasHousekeeper: false,
+      issold: true,
+    },
+    {
+      householdName: "second",
+      price: " 3 億 2千萬",
+      pings: "1200坪",
+      hasPool: true,
+      hasBasement: true,
+      floors: 7,
+      bathRoom: 4,
+      hasHousekeeper: true,
+      issold: false,
+    },
+  ],
+};
+
+/*
+==========================
+!!!!! 7.物件結構取資料 !!!!!
+==========================
+*/
+
+// 下方為台灣一間旅館的 JSON 資料
+// 有一個客戶，在下週二平常日時段，將所有房型都訂了一間房
+// 請透過程式去計算他一共花了多少錢
+
+let roomDetail = {
+  success: true,
+  items: [
+    {
+      id: "3Elqe8kfMxdZv5xFLV4OUeN6jhmxIvQSTyj4eTgIowfIRvF4rerA2Nuegzc2Rgwu",
+      imageUrl:
+        "https:\/\/images.unsplash.com\/photo-1551776235-dde6d482980b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80",
+      normalDayPrice: 1380,
+      holidayPrice: 1500,
+      name: "Single Room",
+    },
+    {
+      id: "g0mYhN6ignMz4VYW7eiWsXZN8DholHzH8LuVmM6hq5h6BrrqrLMw4aJgHv7LZ3RQ",
+      imageUrl:
+        "https:\/\/images.unsplash.com\/photo-1564182379166-8fcfdda80151?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80",
+      normalDayPrice: 1899,
+      holidayPrice: 2000,
+      name: "Deluxe Single Room",
+    },
+    {
+      id: "RA8NhExaXXZB7EODVALSDvFFQzj1JP0a4C1pwZlacPaieRBwiWoCb0FE0KUbXaxg",
+      imageUrl:
+        "https:\/\/images.unsplash.com\/photo-1526913621366-a4583840d736?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+      normalDayPrice: 2460,
+      holidayPrice: 2500,
+      name: "Double Room",
+    },
+    {
+      id: "kICyWhZ5XSfI4n1d4gBOsDjIyIxNozwgmxYKyZpzi5pjLcU2Nl4RhiGrn6zaPuTJ",
+      imageUrl:
+        "https:\/\/images.unsplash.com\/photo-1519710889408-a67e1c7e0452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80",
+      normalDayPrice: 2888,
+      holidayPrice: 3000,
+      name: "Deluxe Double Room",
+    },
+    {
+      id: "VCxbQq1vLeUtxW781k9Dlq3mHBRNl5YP19Lhq8k5TbIr2BeH58gRpnNKGoEgkysz",
+      imageUrl:
+        "https:\/\/images.unsplash.com\/photo-1558976825-6b1b03a03719?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+      normalDayPrice: 3350,
+      holidayPrice: 3500,
+      name: "Twin Room",
+    },
+    {
+      id: "YovqNpFDaal598jbpd1A14gXwDE6gekTqJgx0AGcq78B8YnP7claymQVFy2GTwgb",
+      imageUrl:
+        "https:\/\/images.unsplash.com\/photo-1552902019-ebcd97aa9aa0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80",
+      normalDayPrice: 3899,
+      holidayPrice: 4000,
+      name: "Deluxe Twin Room",
+    },
+  ],
+};
+
+let sum =
+  roomDetail.items[0].normalDayPrice +
+  roomDetail.items[1].normalDayPrice +
+  roomDetail.items[2].normalDayPrice +
+  roomDetail.items[3].normalDayPrice +
+  roomDetail.items[4].normalDayPrice +
+  roomDetail.items[5].normalDayPrice;
+
+console.log(sum);
+
+/*
+=================
+!!!!! 8.加薪 !!!!!
+=================
+*/
+
+// 老闆想要幫公司兩人加薪到 40,000 元
+// 請透過以下資訊修改，幫老闆做加薪的動作
+
+let salaryData = {
+  company: "circle center",
+  bossName: "casper",
+  staff: [
+    {
+      name: "Bob",
+      salary: 32000,
+    },
+    {
+      name: "Jack",
+      salary: 28000,
+    },
+  ],
+};
+
+// 第一位員工加薪邏輯
+if (salaryData.staff[0].salary < 40000) {
+  let bobSalary = salaryData.staff[0].salary;
+  bobSalary += 8000;
+  console.log(bobSalary);
+}
+
+// 第二位員工加薪邏輯
+if (salaryData.staff[1].salary < 40000) {
+  let jackSalary = salaryData.staff[1].salary;
+  jackSalary += 12000;
+  console.log(jackSalary);
+}
+
+/*
+========================
+!!!!! 9.判斷資料結構 !!!!!
+========================
+*/
+// 陣列資料
+// 物件資料
+// 物件資料
+
+/*
+==========================
+!!!!! 10.物件的屬性和值 !!!!!
+==========================
+*/
+
+/*
+描述一：這是一個 BMI 的物件資料，此物件包含「狀態」及「顏色」屬性
+描述二：狀態與顏色屬性分別顯示的值為：
+        狀態為過輕，顏色為藍色
+        狀態為正常，顏色為紅色
+        狀態為過重，顏色為橙色
+        狀態為輕度肥胖，顏色為黃色
+        狀態為中度肥胖，顏色為黑色
+        狀態為重度肥胖，顏色為綠色
+*/
+
+const bmiData = {
+  statusUnderWeight: {
+    status: "underweight",
+    color: "blue",
+  },
+  statusNormal: {
+    status: "normal",
+    color: "red",
+  },
+  statusOverWeight: {
+    status: "overweight",
+    color: "orange",
+  },
+  statusMildlyObese: {
+    status: "mildly obese",
+    color: "yellow",
+  },
+  statusModeratelyObese: {
+    status: "moderately obese",
+    color: "black",
+  },
+
+  statusSeverelyObese: {
+    status: "severely obese",
+    color: "green",
+  },
+};
+
+console.log(bmiData);
