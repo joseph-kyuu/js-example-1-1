@@ -13,7 +13,7 @@ num1.forEach(function (item) {
   // console.log(sum);
 });
 
-console.log(sum);
+// console.log(sum);
 
 /* 
 ===============
@@ -30,8 +30,8 @@ num2.forEach(function (item) {
   }
 });
 
-console.log(oddArr);
-console.log(oddArr.length);
+// console.log(oddArr);
+// console.log(oddArr.length);
 
 /* 
 ===================
@@ -51,8 +51,8 @@ let objArr = [
 ];
 
 objArr.forEach(function (item) {
-  console.log(item.name);
-  console.log(item.age);
+  // console.log(item.name);
+  // console.log(item.age);
 });
 
 let genderData = [
@@ -95,7 +95,7 @@ genderData.forEach(function (item) {
   }
 });
 
-console.log(manNum, womanNum);
+// console.log(manNum, womanNum);
 
 /* 
 =============================
@@ -923,7 +923,7 @@ let chargeStations = [
   },
 ];
 
-console.log(chargeStations);
+// console.log(chargeStations);
 
 let charge = {
   coin: 0,
@@ -938,7 +938,7 @@ chargeStations.forEach(function (item) {
   }
 });
 
-console.log(charge);
+// console.log(charge);
 
 /* 
 ========================
@@ -959,4 +959,264 @@ chargeStations.forEach(function (item) {
   }
 });
 
-console.log(filterData);
+// console.log(filterData);
+
+/* 
+===========================
+!!!!! 新增資料、資料顯示 !!!!!
+===========================
+*/
+
+/* 
+====================================================
+1.預設資料顯示在網頁。
+2.點擊按鈕後，取得輸入資料、取得選單資料，並建立物件儲存資料。
+3.並解將物件推入空陣列中。
+4.將陣列資料依全部、免費、投幣式的分類，顯示在頁面。
+====================================================
+*/
+
+/* 
+=======
+取得節點
+=======
+*/
+
+// 取得名稱輸入欄位
+let chargingName = document.querySelector(".chargingName");
+console.log(chargingName);
+console.dir(chargingName);
+
+// 取得付款方式輸入欄位
+let chargingPay = document.querySelector(".chargingPay");
+console.log(chargingPay);
+console.dir(chargingPay);
+
+// 取得儲存按鈕
+let chargingStorage = document.querySelector(".chargingStorage");
+console.log(chargingStorage);
+console.dir(chargingStorage);
+
+// 取得清單
+let showcharging = document.querySelector(".showcharging");
+console.log(showcharging);
+console.dir(showcharging);
+
+// 取得全部按鈕
+let showAllBtn = document.querySelector(".showAllBtn");
+console.log(showAllBtn);
+console.dir(showAllBtn);
+
+// 取得免費按鈕
+let showFreeBtn = document.querySelector(".showFreeBtn");
+console.log(showFreeBtn);
+console.dir(showFreeBtn);
+
+// 取得投幣式按鈕
+let showCoinBtn = document.querySelector(".showCoinBtn");
+console.log(showCoinBtn);
+console.dir(showCoinBtn);
+
+// 取得刪除最後一筆資料按鈕
+let deleteOneBtn = document.querySelector(".deleteOneBtn");
+console.log(deleteOneBtn);
+console.dir(deleteOneBtn);
+
+/* 
+=================
+儲存即時輸入欄位資料
+=================
+*/
+let chargingNameValue = chargingName.value;
+let chargingPayValue = chargingPay.value;
+
+/* 
+========
+宣告空陣列
+========
+*/
+let chargingArr = [
+  {
+    pay: "免費",
+    name: "廖洧杰充電站",
+  },
+  {
+    pay: "投幣式",
+    name: "小花充電站",
+  },
+  {
+    pay: "投幣式",
+    name: "小明充電站",
+  },
+  {
+    pay: "投幣式",
+    name: "小天充電站",
+  },
+];
+
+/* 
+=======================
+宣告取得即時輸入欄位資料函式
+=======================
+*/
+
+function getChargingValue() {
+  // 清空名稱輸入欄位即時資料
+  chargingNameValue = chargingName.value;
+  console.log(chargingNameValue);
+
+  // 清空付款方式輸入欄位即時資料
+  chargingPayValue = chargingPay.value;
+  console.log(chargingPayValue);
+}
+
+/* 
+=======================
+宣告清空即時輸入欄位資料函式
+=======================
+*/
+
+function clearChargingValue() {
+  // 取得名稱輸入欄位即時資料
+  chargingName.value = "";
+
+  // 取得付款方式輸入欄位即時資料
+  chargingPay.value = "免費";
+}
+
+/* 
+====================
+將預設資料，顯示在頁面上
+====================
+*/
+
+/*
+!!!!!  這種寫法會一直在更新 DOM，老師的寫法是先把字串處理好，儲存在一個字串內，然後再一次性更新 DOM。 !!!!!
+*/
+
+/*
+!!!!! 這裡其實就是初始化頁面  !!!!!
+*/
+
+function showDefaultData() {
+  chargingArr.forEach(function (item) {
+    showcharging.innerHTML += `<li>${item.name}充電站，${item.pay}。</li>`;
+  });
+}
+showDefaultData();
+
+/* 
+=================
+宣告顯示全部資料函式
+=================
+*/
+
+/*
+!!!!!  這種寫法會一直在更新 DOM，老師的寫法是先把字串處理好，儲存在一個字串內，然後再一次性更新 DOM。 !!!!!
+*/
+
+function showAllcharging() {
+  // 在清單，顯示全部資料
+  showcharging.innerHTML = "";
+  chargingArr.forEach(function (item) {
+    showcharging.innerHTML += `<li>${item.name}充電站，${item.pay}。</li>`;
+  });
+}
+
+/* 
+=====================================================
+取得即時輸入資料、建立物件儲存資料、資料新增至陣列、顯示全部資料
+=====================================================
+*/
+
+chargingStorage.addEventListener("click", function () {
+  // 呼叫取得即時輸入欄位資料函式
+  getChargingValue();
+
+  // 宣告、建立物件
+  let chargingObj = {
+    name: chargingNameValue,
+    pay: chargingPayValue,
+  };
+
+  // 建立陣列資料
+  chargingArr.push(chargingObj);
+  console.log(chargingArr);
+  showAllcharging();
+  clearChargingValue();
+});
+
+/* 
+==================
+篩選後，在頁面顯示資料
+==================
+*/
+
+/*
+!!!!!  
+1.我的寫法是個別按鈕去綁監聽，但其實可以使用父層綁監聽的方式。
+2.使用 e.target.value 、forEach 的 item，來判斷點擊位置。
+3.innerHTML 寫法會一直在更新 DOM，老師的寫法是先把字串處理好，儲存在一個字串內，然後再一次性更新 DOM。
+
+
+!!!!!
+*/
+
+// 在清單，顯示全部資料
+showAllBtn.addEventListener("click", function () {
+  showcharging.innerHTML = "";
+  chargingArr.forEach(function (item) {
+    showcharging.innerHTML += `<li>${item.name}充電站，${item.pay}。</li>`;
+  });
+});
+
+// 在清單，顯示免費資料
+let showFreeArr = [];
+
+showFreeBtn.addEventListener("click", function (e) {
+  showFreeArr = [];
+
+  chargingArr.forEach(function (item) {
+    if (item.pay === e.target.value) {
+      showFreeArr.push(item);
+    }
+    console.log(`我是showFreeArr`);
+    console.log(showFreeArr);
+
+    showcharging.innerHTML = "";
+    showFreeArr.forEach(function (item) {
+      showcharging.innerHTML += `<li>${item.name}充電站，${item.pay}。</li>`;
+    });
+  });
+});
+
+// 在清單，顯示投幣式資料
+let showCoinArr = [];
+
+showCoinBtn.addEventListener("click", function (e) {
+  showCoinArr = [];
+
+  chargingArr.forEach(function (item) {
+    if (item.pay === e.target.value) {
+      showCoinArr.push(item);
+    }
+    console.log(`我是showCoinArr`);
+    console.log(showCoinArr);
+
+    showcharging.innerHTML = "";
+    showCoinArr.forEach(function (item) {
+      showcharging.innerHTML += `<li>${item.name}充電站，${item.pay}。</li>`;
+    });
+  });
+});
+
+/* 
+=============
+刪除最後一筆資料
+=============
+*/
+
+deleteOneBtn.addEventListener("click", function () {
+  chargingArr.pop();
+  showAllcharging();
+});
