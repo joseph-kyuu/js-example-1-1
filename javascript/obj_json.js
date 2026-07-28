@@ -872,6 +872,7 @@ let roomDetail = {
   ],
 };
 
+// 手動加總
 let sum =
   roomDetail.items[0].normalDayPrice +
   roomDetail.items[1].normalDayPrice +
@@ -881,6 +882,14 @@ let sum =
   roomDetail.items[5].normalDayPrice;
 
 console.log(sum);
+
+// forEach 加總
+let total;
+
+roomDetail.items.forEach(function (item) {
+  total += item.normalDayPrice;
+});
+console.log(total);
 
 /*
 =================
