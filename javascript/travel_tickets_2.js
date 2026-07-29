@@ -78,16 +78,10 @@ const searchNum = document.querySelector("#searchResult-text");
 str、innerHTML、forEach 渲染卡片
 ==============================
 */
-
-/*
-!!!!! 可以改為帶參數，傳入陣列資料，這樣很多地方都可以使用 !!!!!
-*/
-
-function renderTravelTickets() {
-  let travelCardsStr = ``;
-  let travelCardsNum = travelCards.length;
-  travelCards.forEach(function (travelCard) {
-    travelCardsStr += `
+function travelTicketsRender(travalTicketsData) {
+  let travelTicketsStr = "";
+  travalTicketsData.forEach(function (travelCard) {
+    travelTicketsStr += `
         <li class="ticketCard">
           <div class="ticketCard-img">
             <a href="#">
@@ -121,11 +115,10 @@ function renderTravelTickets() {
         </li>`;
   });
 
-  ticketCardArea.innerHTML = travelCardsStr;
-  searchNum.textContent = `本次搜尋共 ${travelCardsNum} 筆資料`;
-  searchArea.value = "全部地區";
+  ticketCardArea.innerHTML = travelTicketsStr;
+  searchNum.textContent = `本次搜尋共 ${travalTicketsData.length} 筆資料`;
 }
-renderTravelTickets();
+travelTicketsRender(travelCards);
 
 /*
 ===============
@@ -150,8 +143,7 @@ renderTravelTickets();
 !!!!!
 */
 
-addTicketBtn.addEventListener("click", function (e) {
-  validation();
+addTicketBtn.addEventListener("click", function () {
   let travelTicketObj = {
     name: ticketName.value, // 加入 trim()
     imgUrl: ticketImg.value,
@@ -162,25 +154,9 @@ addTicketBtn.addEventListener("click", function (e) {
     rate: ticketRate.value, // 加入 number()
   };
   travelCards.push(travelTicketObj);
-  addTicketForm.reset();
-  renderTravelTickets();
+  travelTicketsRender(travelCards);
+  searchArea.value = "全部地區";
 });
-
-// 驗證未輸入
-function validation() {
-  if (
-    ticketName.value === "" ||
-    ticketImg.value === "" ||
-    ticketArea.value === "" ||
-    ticketDescription.value === "" ||
-    ticketGroup.value === "" ||
-    ticketPrice.value === "" ||
-    ticketRate.value === ""
-  ) {
-    alert("請填寫所有欄位");
-    return;
-  }
-}
 
 /*
 ===============
@@ -196,94 +172,15 @@ function validation() {
 4.依據卡片數量顯示資料筆數。
 !!!!!
 */
-/*
-!!!!! 第二種寫法 重組陣列 !!!!!
-*/
 
 searchArea.addEventListener("change", function (e) {
-  let searchAreaStr = ``;
-  let travelCardsNum = 0;
+  let areaTravelCards = [];
   travelCards.forEach(function (travelCard) {
-    if (e.target.value === travelCard.area) {
-      travelCardsNum++;
-      searchAreaStr += `
-        <li class="ticketCard">
-          <div class="ticketCard-img">
-            <a href="#">
-              <img
-                src="${travelCard.imgUrl}"
-                alt=""
-              />
-            </a>
-            <div class="ticketCard-region">${travelCard.area}</div>
-            <div class="ticketCard-rank">${travelCard.rate}</div>
-          </div>
-          <div class="ticketCard-content">
-            <div>
-              <h3>
-                <a href="#" class="ticketCard-name">${travelCard.name}</a>
-              </h3>
-              <p class="ticketCard-description">
-                ${travelCard.description}
-              </p>
-            </div>
-            <div class="ticketCard-info">
-              <p class="ticketCard-num">
-                <span><i class="fas fa-exclamation-circle"></i></span>
-                剩下最後 <span id="ticketCard-num">${travelCard.group} </span> 組
-              </p>
-              <p class="ticketCard-price">
-                TWD <span id="ticketCard-price">${travelCard.price}</span>
-              </p>
-            </div>
-          </div>
-        </li>`;
-    }
-    if (e.target.value === "全部地區") {
-      travelCardsNum++;
-      searchAreaStr += `
-        <li class="ticketCard">
-          <div class="ticketCard-img">
-            <a href="#">
-              <img
-                src="${travelCard.imgUrl}"
-                alt=""
-              />
-            </a>
-            <div class="ticketCard-region">${travelCard.area}</div>
-            <div class="ticketCard-rank">${travelCard.rate}</div>
-          </div>
-          <div class="ticketCard-content">
-            <div>
-              <h3>
-                <a href="#" class="ticketCard-name">${travelCard.name}</a>
-              </h3>
-              <p class="ticketCard-description">
-                ${travelCard.description}
-              </p>
-            </div>
-            <div class="ticketCard-info">
-              <p class="ticketCard-num">
-                <span><i class="fas fa-exclamation-circle"></i></span>
-                剩下最後 <span id="ticketCard-num">${travelCard.group} </span> 組
-              </p>
-              <p class="ticketCard-price">
-                TWD <span id="ticketCard-price">${travelCard.price}</span>
-              </p>
-            </div>
-          </div>
-        </li>`;
+    if (travelCard.area === e.target.value) {
+      areaTravelCards.push(travelCard);
+    } else if ("全部地區" === e.target.value) {
+      areaTravelCards.push(travelCard);
     }
   });
-  ticketCardArea.innerHTML = searchAreaStr;
-  searchNum.textContent = `本次搜尋共 ${travelCardsNum} 筆資料`;
+  travelTicketsRender(areaTravelCards);
 });
-
-/*
-!!!!!
-優化
-1.資料可以重組陣列。
-2.一個渲染函式，帶參數，帶入陣列資料。
-3.顯示幾筆資料集中在渲染函式。
-!!!!!
-*/
