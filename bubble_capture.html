@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bubble_capture.css" />
+  </head>
+  <body>
+    <h2>範例一 發泡</h2>
+    <div class="example-1">
+      我是外層
+      <p class="p-1">我是內層</p>
+    </div>
+    <hr />
+    <h2>範例二 發泡</h2>
+    <div class="example-2">
+      我是第一層
+      <p class="p-2">我是第二層 <em class="em-1">我是第三層</em></p>
+    </div>
+    <hr />
+    <h2>範例三 發泡 event物件</h2>
+    <div class="example-3">
+      我是第一層
+      <p class="p-3">我是第二層 <em class="em-2">我是第三層</em></p>
+    </div>
+    <hr />
+    <h2>範例四 阻止發泡 event物件</h2>
+    <div class="example-4">
+      我是第一層
+      <p class="p-4">
+        我是第二層
+        <em class="em-3">我是第三層<em class="em-4">我是第四層</em></em>
+      </p>
+    </div>
+    <hr />
+    <h2>範例五 捕獲 event物件</h2>
+    <div class="example-5">
+      我是第一層
+      <p class="p-5">
+        我是第二層
+        <em class="em-4">我是第三層<em class="em-5">我是第四層</em></em>
+      </p>
+    </div>
+    <hr />
+    <script src="./javascript/bubble_capture.js"></script>
+  </body>
+</html>
