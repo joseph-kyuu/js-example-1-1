@@ -1,0 +1,43 @@
+.example-1,
+.p-1,
+.em-1,
+.em-4 {
+  border: 1px solid;
+}
+
+.example-1,
+.example-2,
+.example-3,
+.example-4,
+.example-5 {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background: pink;
+}
+
+.p-1,
+.p-2,
+.p-3,
+.p-4,
+.p-5 {
+  background: orange;
+  padding: 1rem;
+}
+
+.em-1,
+.em-2,
+.em-3,
+.em-4 {
+  background: lightblue;
+  padding: 0.5rem;
+}
+
+.em-4 {
+  background: yellow;
+  padding: 0.25rem;
+}
+
+.em-5 {
+  background: green;
+  padding: 0.1rem;
+}
