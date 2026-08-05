@@ -47,7 +47,7 @@ const password = document.querySelector(".password");
 const submmit = document.querySelector(".submmit");
 // console.log(account, password, submmit);
 
-function register(email, pasword) {
+function register(email, password) {
   let objData = {
     email,
     password,
@@ -65,4 +65,30 @@ function register(email, pasword) {
 
 submmit.addEventListener("click", function (e) {
   register(account.value, password.value);
+});
+
+/*
+===================
+!!!!! 登入帳號 !!!!!
+===================
+*/
+
+const account2 = document.querySelector(".account2");
+const password2 = document.querySelector(".password2");
+const submmit2 = document.querySelector(".submmit2");
+
+submmit2.addEventListener("click", function () {
+  let objLogin = {
+    email: account2.value,
+    password: password2.value,
+  };
+
+  axios
+    .post("https://escape-room.hexschool.io/api/user/signin", objLogin)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 });
