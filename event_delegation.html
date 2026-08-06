@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>改文字內容 1</h2>
+    <ul class="list1">
+      <li>第一個項目</li>
+      <li>第二個項目</li>
+      <li>第三個項目</li>
+      <li>第四個項目</li>
+    </ul>
+    <hr style="margin-top: 1rem; margin-bottom: 1rem" />
+    <h2>改文字內容 2</h2>
+    <ul class="list2">
+      <li>
+        <span href=""><strong>第一個項目</strong></span>
+      </li>
+      <li>第二個項目</li>
+      <li>第三個項目</li>
+      <li><i>第四個項目</i></li>
+    </ul>
+    <hr style="margin-top: 1rem; margin-bottom: 1rem" />
+    <h2>多個按鈕</h2>
+    <div class="buttons">
+      <span>123</span>
+      <button class="save">Save</button>
+      <button class="load"><span>Load</span></button>
+      <button class="search">Search</button>
+    </div>
+    <hr style="margin-top: 1rem; margin-bottom: 1rem" />
+    <h2>顯示、關閉</h2>
+    <button data-toggle-id="show-hidden" class="button3">顯示或關閉</button>
+    <div
+      style="border: 1px solid black; padding: 1rem; margin-top: 1rem"
+      hidden
+      id="show-hidden"
+    >
+      我是一個視窗文字
+    </div>
+    <p
+      style="border: 1px solid black; padding: 1rem; margin-top: 1rem"
+      hidden
+      id="show-hidden"
+    >
+      我是一個文字段落
+    </p>
+    <hr style="margin-top: 1rem; margin-bottom: 1rem" />
+    <h2>多個按鈕的顯示、關閉</h2>
+    <div class="open-close-buttons">
+      <button data-toggle-id="open-close-buttons1">顯示關閉一</button>
+      <button data-toggle-id="open-close-buttons2">顯示關閉二</button>
+      <button data-toggle-id="open-close-buttons3">顯示關閉三</button>
+      <button>無</button>
+    </div>
+    <div
+      id="open-close-buttons1"
+      style="border: 1px solid black; padding: 1rem; margin-top: 1rem"
+      hidden
+    >
+      顯示關閉一
+    </div>
+    <div
+      id="open-close-buttons2"
+      style="border: 1px solid black; padding: 1rem; margin-top: 1rem"
+      hidden
+    >
+      顯示關閉二
+    </div>
+    <div
+      id="open-close-buttons3"
+      style="border: 1px solid black; padding: 1rem; margin-top: 1rem"
+      hidden
+    >
+      顯示關閉三
+    </div>
+    <script src="./javascript/event_delegation.js"></script>
+  </body>
+</html>
