@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>瀏覽器預設行為</h2>
+    <ul id="menu1" class="menu1">
+      <li><a href="/html">HTML</a></li>
+      <li><a href="/javascript">JavaScript</a></li>
+      <li><a href="/css">CSS</a></li>
+    </ul>
+    <hr>
+    <h2>客製化行為、瀏覽器預設行為</h2>
+    <ul id="menu2" class="menu2">
+      <li><a href="/html">HTML</a></li>
+      <li><a href="/javascript">JavaScript</a></li>
+      <li><a href="/css">CSS</a></li>
+    </ul>
+      <hr>
+    <h2>阻止瀏覽器預設行為、執行客製化行為</h2>
+    <ul id="menu3" class="menu3">
+      <li><a href="/html">HTML</a></li>
+      <li><a href="/javascript">JavaScript</a></li>
+      <li><a href="/css">CSS</a></li>
+    </ul>
+      <hr>
+      <h2>passive</h2>
+      <div id="box" style="height:600px; background-color: blue;">
+        滑動我
+      </div>
+      <hr>
+      <h2>阻止瀏覽器預設行為、 預設行為已被阻止</h2>
+      <ul id="menu4" class="menu4" style="background-color: chocolate;">
+        <li>
+          <div class="outer" href="/html" style="background-color: red;">HTML
+            <br><a class="inner-link" href="/javascript" style="background-color: green;">JavaScript</a>
+          </div>
+        </li>
+      </ul>
+    <script src="./javascript/event_preventDefault.js"
+  "></script>
+  </body>
+</html>
