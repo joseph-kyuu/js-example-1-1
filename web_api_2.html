@@ -415,15 +415,17 @@
       <section class="shoppingCart">
         <h3 class="section-title">我的購物車</h3>
         <div class="overflowWrap">
-          <table class="shoppingCart-table">
+          <table class="shoppingCart-table cartsListTable">
             <!-- 表個標題 -->
-            <tr>
-              <th width="40%">品項</th>
-              <th width="15%">單價</th>
-              <th width="15%">數量</th>
-              <th width="15%">金額</th>
-              <th width="15%"></th>
-            </tr>
+            <thead class="cartsListHead">
+              <tr>
+                <th width="40%">品項</th>
+                <th width="15%">單價</th>
+                <th width="15%">數量</th>
+                <th width="15%">金額</th>
+                <th width="15%"></th>
+              </tr>
+            </thead>
             <!-- 購物車項目 -->
             <tbody class="cartsListBody">
               <!-- <tr>
@@ -441,24 +443,26 @@
                 </td>
               </tr> -->
             </tbody>
-            <tr>
-              <td>
-                <a href="#" class="discardAllBtn">刪除所有品項</a>
-              </td>
-              <td></td>
-              <td></td>
-              <td>
-                <p>總金額</p>
-              </td>
-              <td class="finalPrice">NT$0</td>
-            </tr>
+            <tfoot class="cartsListFoot">
+              <tr>
+                <td>
+                  <a href="#" class="discardAllBtn">刪除所有品項</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                  <p>總金額</p>
+                </td>
+                <td class="finalPrice">NT$0</td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </section>
       <!-- 訂單資料 -->
       <section class="orderInfo wrap" id="orderInfo">
         <h3 class="section-title">填寫預訂資料</h3>
-        <form action="" class="orderInfo-form">
+        <form action="" class="orderInfo-form customerDataForm">
           <div class="orderInfo-formGroup">
             <label for="customerName" class="orderInfo-label">姓名</label>
             <div class="orderInfo-inputWrap">
