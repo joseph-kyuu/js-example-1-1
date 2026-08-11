@@ -24,11 +24,11 @@ const customerEmail = document.querySelector("#customerEmail");
 const customerAddress = document.querySelector("#customerAddress");
 const tradeWay = document.querySelector("#tradeWay");
 const orderInfoBtn = document.querySelector(".orderInfo-btn");
+const customerDataForm = document.querySelector(".customerDataForm");
+const cartsListHead = document.querySelector(".cartsListHead");
+const cartsListFoot = document.querySelector(".cartsListFoot");
 
-// console.log(
-//   customerName
-
-// );
+// console.log(customerDataForm);
 
 /*
 ======================
@@ -141,6 +141,7 @@ function getCartsList() {
     .get(`${base}/api/livejs/v1/customer/${path}/carts`)
     .then(function (res) {
       cartsListData = res.data.carts;
+
       renderCartsList(cartsListData);
       finalPrice.textContent = `NT$${res.data.finalTotal}`;
     })
@@ -150,6 +151,18 @@ function getCartsList() {
 }
 
 function renderCartsList(data) {
+  if (data.length === 0) {
+    cartsListHead.style.display = "none";
+    cartsListFoot.style.display = "none";
+    cartsListBody.innerHTML = `
+      <tr>
+        <td colspan="5">目前購物車沒有商品</td>
+      </tr>
+    `;
+    return;
+  }
+  cartsListHead.style.display = "";
+  cartsListFoot.style.display = "";
   cartsListStr = "";
   data.forEach(function (cartListData) {
     cartsListStr += `
@@ -240,6 +253,8 @@ orderInfoBtn.addEventListener("click", function (e) {
   axios
     .post(`${base}/api/livejs/v1/customer/${path}/orders`, customerOrderData)
     .then(function (res) {
+      customerDataForm.reset();
+      getCartsList();
       console.log("訂單送出成功");
     })
     .catch(function (err) {
