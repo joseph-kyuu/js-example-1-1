@@ -38,19 +38,24 @@ const cartsListFoot = document.querySelector(".cartsListFoot");
 
 /*
 ===========
-1.取得全部商品資料。
+1.使用 api get，取得全部商品資料。
 2.宣告空字串。
 3.使用 forEach() 組字串。
 4.使用 innerHTML 渲染商品字串。
 ===========
 */
 let productsData;
-let productsStr = "";
 
+/*
+!!!!!
+1.使用 api get，取得全部商品資料
+!!!!
+*/
 function getProductsList() {
   axios
     .get(`${base}/api/livejs/v1/customer/${path}/products`)
     .then(function (res) {
+      console.log(res);
       productsData = res.data.products;
       renderProductsList(productsData);
     })
@@ -59,8 +64,15 @@ function getProductsList() {
     });
 }
 
+/*
+!!!!! 
+2.宣告空字串。
+3.使用 forEach() 組字串。
+4.使用 innerHTML 渲染商品字串。
+!!!!!
+*/
 function renderProductsList(data) {
-  productsStr = "";
+  let productsStr = "";
   data.forEach(function (productData) {
     productsStr += `
       <li class="productCard">
@@ -86,13 +98,30 @@ getProductsList();
 ====================
 */
 
-let quantity = 0;
+/*
+===========
+1.加入購物車按鈕，註冊事件監聽器。
+2.阻止<a>預設行為。
+3.確認點擊到正確的按鈕。
+4.取得購物車 id。
+5.使用 api post，取得新增購物車功能。
+===========
+*/
+
+// 1.加入購物車按鈕，註冊事件監聽器。
 productWrap.addEventListener("click", function (e) {
+  // 2.阻止<a>預設行為。
   e.preventDefault();
+
+  // 3.確認點擊到正確的按鈕。
   if (!e.target.classList.contains("addCardBtn")) {
     return;
   }
+
+  // 4.取得購物車 id。
   let productId = e.target.dataset.productId;
+
+  // 5.使用 api post，取得新增購物車功能。
   axios
     .post(`${base}/api/livejs/v1/customer/${path}/carts`, {
       data: {
@@ -101,6 +130,7 @@ productWrap.addEventListener("click", function (e) {
       },
     })
     .then(function (res) {
+      // 渲染商品列表
       getCartsList();
       console.log("商品加入購物車成功");
     })
@@ -115,13 +145,21 @@ productWrap.addEventListener("click", function (e) {
 ===================
 */
 
+/*
+===========
+1.篩選按鈕，註冊事件監聽器。
+2.if 判斷式，篩選出正確的商品資料，以利渲染商品列表。
+3.宣告一個空陣列，儲存篩選後的資料。
+===========
+*/
+
 productSelect.addEventListener("change", function (e) {
   let productsArr = [];
+
   productsData.forEach(function (productData) {
     if (e.target.value === productData.category) {
       productsArr.push(productData);
       renderProductsList(productsArr);
-      console.log(e.target.value);
     } else if (e.target.value === "全部") {
       renderProductsList(productsData);
     }
@@ -134,14 +172,29 @@ productSelect.addEventListener("change", function (e) {
 ========================
 */
 
+/*
+===========
+1.使用 api get，取得購物車列表。
+2.宣告空字串。
+3.使用 forEach() 組字串。
+4.使用 innerHTML 渲染商品字串。
+5.使用 if 判斷式，確認購物車內是否有商品，以利確認要渲染的購物車畫面。
+===========
+*/
+
+/*
+!!!!!
+1.使用 api get，取得購物車列表。
+!!!!!
+*/
 function getCartsList() {
   let cartsListData;
-  let cartsListStr = "";
+
+  // 1.使用 api get，取得購物車列表。
   axios
     .get(`${base}/api/livejs/v1/customer/${path}/carts`)
     .then(function (res) {
       cartsListData = res.data.carts;
-
       renderCartsList(cartsListData);
       finalPrice.textContent = `NT$${res.data.finalTotal}`;
     })
@@ -150,7 +203,17 @@ function getCartsList() {
     });
 }
 
+/*
+!!!!!
+2.宣告空字串。
+3.使用 forEach() 組字串。
+4.使用 innerHTML 渲染商品字串。
+5.使用 if 判斷式，確認購物車內是否有商品，以利確認要渲染的購物車畫面。
+!!!!!
+*/
+
 function renderCartsList(data) {
+  // 5.使用 if 判斷式，確認購物車內是否有商品，以利確認要渲染的購物車畫面。
   if (data.length === 0) {
     cartsListHead.style.display = "none";
     cartsListFoot.style.display = "none";
@@ -163,7 +226,11 @@ function renderCartsList(data) {
   }
   cartsListHead.style.display = "";
   cartsListFoot.style.display = "";
-  cartsListStr = "";
+
+  // 2.宣告空字串。
+  let cartsListStr = "";
+
+  // 3.使用 forEach() 組字串。
   data.forEach(function (cartListData) {
     cartsListStr += `
             <tr>
@@ -182,6 +249,7 @@ function renderCartsList(data) {
             </tr>`;
   });
 
+  // 4.使用 innerHTML 渲染商品字串。
   cartsListBody.innerHTML = cartsListStr;
 }
 
@@ -193,16 +261,35 @@ getCartsList();
 ===========================
 */
 
+/*
+===========
+1.刪除單一商品按鈕，註冊事件監聽器。
+2.阻止<a>預設行為。
+3.確認點擊到正確的按鈕。
+4.取得購物車 id。
+5.使用 api delete，取得刪除購物車內單一商品功能。
+6.重新渲染購物車列表。
+===========
+*/
+
+// 1.刪除單一商品按鈕，註冊事件監聽器。
 cartsListBody.addEventListener("click", function (e) {
+  // 2.阻止<a>預設行為。
   e.preventDefault();
+
+  // 3.確認點擊到正確的按鈕。
   if (!e.target.classList.contains("deleteProductBtn")) {
     return;
   }
+
+  // 4.取得購物車 id。
+  // 5.使用 api delete，取得刪除購物車內單一商品功能。
   axios
     .delete(
       `${base}/api/livejs/v1/customer/${path}/carts/${e.target.dataset.productId}`,
     )
     .then(function (res) {
+      // 6.重新渲染購物車列表。
       getCartsList();
       console.log("商品刪除成功");
     })
@@ -215,6 +302,15 @@ cartsListBody.addEventListener("click", function (e) {
 ===========================
 !!!!! 刪除購物車全部商品 !!!!!
 ===========================
+*/
+
+/*
+===========
+1.刪除全部商品按鈕，註冊事件監聽器。
+2.阻止<a>預設行為。
+4.使用 api delete，取得刪除購物車內單一商品功能。
+5.重新渲染購物車列表。
+===========
 */
 
 discardAllBtn.addEventListener("click", function (e) {
@@ -234,6 +330,17 @@ discardAllBtn.addEventListener("click", function (e) {
 ======================
 !!!!! 送出購買訂單 !!!!!
 ======================
+*/
+
+/*
+===========
+1.送出預定資料按鈕，註冊事件監聽器。
+2.阻止<a>預設行為。
+3.取得訂單資料。
+4.使用 api post，取得刪除購物車內單一商品功能。
+5.清空表單欄位資料。
+6.重新渲染購物車列表。
+===========
 */
 
 orderInfoBtn.addEventListener("click", function (e) {
