@@ -315,10 +315,8 @@ let result4 = arr41.findIndex(function (item) {
   return item.married === true;
 });
 
-console.log("我是result3");
-console.log(result3);
-console.log("我是result4");
-console.log(result4);
+console.log("我是result3", result3);
+console.log("我是result4", result4);
 
 /*
 ====================================================
@@ -405,12 +403,12 @@ let result8 = arr43.filter(function (item) {
   return item.weight <= 45;
 });
 
-console.log(result7);
-console.log(result8);
+console.log("使用filter", result7);
+console.log("使用filter", result8);
 
 /*
 ===========================================
-!!!!! map(fn)，尋找陣中符合條件的全部元素 !!!!!
+!!!!! map(fn)， 依據現有資料組合新資料!!!!!
 ===========================================
 */
 
@@ -455,7 +453,7 @@ let result10 = arr44.map(function (item) {
   return item.weight;
 });
 
-console.log(result9);
+console.log("使用map", result9);
 console.log(result10);
 console.log(arr44);
 
@@ -569,9 +567,9 @@ null       → ""
 
 let string4 = "one,two,three";
 let arr52 = string4.split(",");
-console.log(arr52);
+console.log("使用split", arr52);
 let string5 = arr52.join("-");
-console.log(string5);
+console.log("使用join", string5);
 
 let arr53 = ["one", "two", 3, 4, true, undefined, null];
 let string6 = arr53.join("@");
