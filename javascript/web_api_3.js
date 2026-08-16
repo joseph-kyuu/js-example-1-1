@@ -16,6 +16,8 @@ const token = `GdPbJQoYJWfH0pHRrfjWaoKW5KG2`;
 
 const orderList = document.querySelector(".orderList");
 const deleteAllOrders = document.querySelector(".deleteAllOrders");
+const proportion = document.querySelector(".proportion");
+// console.log(proportion);
 
 /*
 ===================
@@ -35,6 +37,8 @@ const deleteAllOrders = document.querySelector(".deleteAllOrders");
 ===========
 */
 
+let ordersListData;
+
 // 取得訂單
 function getOrdersList() {
   axios
@@ -44,10 +48,11 @@ function getOrdersList() {
       },
     })
     .then(function (res) {
-      let ordersListData = res.data.orders;
+      ordersListData = res.data.orders;
+      checkOrdersEmpty();
       renderOrderList(ordersListData);
-      renderCategoryProportion(ordersListData);
-      renderProductsProportion(ordersListData);
+      categoryProportion(ordersListData);
+      productsProportion(ordersListData);
     })
     .catch(function (err) {
       console.log(err);
@@ -57,17 +62,19 @@ function getOrdersList() {
 // 處理訂單內容
 function renderOrderList(data) {
   let ordersListStr = "";
-  let ordersProductArr = [];
+  // let ordersProductArr = [];
 
   data.forEach(function (orderListData) {
     // 處理商品內容
     let ordersProducts = handleProductItems(orderListData);
+    // console.log(ordersProducts);
     // 處理日期內容
     const time = handleDate(orderListData);
     // 處理訂單內容
+    // (可把id統一放在父層，就不用刪除按鈕寫一次，訂單付款狀態寫一次。)
     ordersListStr += `
       <tr>
-              <td>${orderListData.createdAt}</td>
+              <td>${orderListData.id}</td>
               <td>
                 <p>${orderListData.user.name}</p>
                 <p>${orderListData.user.tel}</p>
@@ -78,10 +85,10 @@ function renderOrderList(data) {
                 ${ordersProducts}
               <td>${time}</td>
               <td class="orderStatus">
-                <a class="orderPaidState" data-order-paid-id="${orderListData.id}" href="#">${orderListData.paid ? "已付款" : "未付款"}</a>
+                <a class="orderPaidState"  href="#">${orderListData.paid ? `<span style="color:green;" data-order-paid-id="${orderListData.id}">已付款</span>` : `<span style="color:red;" data-order-paid-id="${orderListData.id}">未付款</span></a>`}
               </td>
               <td>
-                <input type="button" class="delSingleOrder-Btn deleteOrderBtn" value="刪除" data-order-delete-id="${orderListData.id}"/>
+                <input type="button" class="delSingleOrder-Btn deleteOrderBtn" value="刪除" data-order-delete-id="${orderListData.id}"/> 
               </td>
             </tr>`;
   });
@@ -131,31 +138,23 @@ function handleDate(time) {
 !!!!!
 */
 
-function renderCategoryProportion(data) {
+function categoryProportion(data) {
   let categoryProportionObj = {};
   data.forEach(function (orderProductsData) {
     let orderProducts = orderProductsData.products;
     orderProducts.forEach(function (orderProduct) {
       if (categoryProportionObj[orderProduct.category] === undefined) {
-        categoryProportionObj[orderProduct.category] = 1;
+        categoryProportionObj[orderProduct.category] =
+          orderProduct.price * orderProduct.quantity;
       } else {
-        categoryProportionObj[orderProduct.category]++;
+        categoryProportionObj[orderProduct.category] += orderProduct.price;
       }
     });
   });
 
   categoryProportionArr = Object.entries(categoryProportionObj);
-  var chart = c3.generate({
-    bindto: "#chart1",
-    data: {
-      // iris data from R
-      columns: categoryProportionArr,
-      type: "pie",
-    },
-    color: {
-      pattern: ["#DACBFF", "#9D7FEA", "#5434A7"],
-    },
-  });
+
+  renderProportion(categoryProportionArr, "#chart1");
 }
 
 /*
@@ -178,7 +177,7 @@ function renderCategoryProportion(data) {
 !!!!!
 */
 
-function renderProductsProportion(data) {
+function productsProportion(data) {
   let obj = {};
   let arr;
   data.forEach(function (item) {
@@ -207,13 +206,20 @@ function renderProductsProportion(data) {
     }
   });
 
-  earnArr.push(["其他", othersTotal]);
+  if (earnArr.length > 3) {
+    earnArr.push(["其他", othersTotal]);
+  }
 
+  renderProportion(earnArr, "#chart2");
+}
+
+// c3
+function renderProportion(data, bindto) {
   var chart = c3.generate({
-    bindto: "#chart3",
+    bindto,
     data: {
       // iris data from R
-      columns: earnArr,
+      columns: data,
       type: "pie",
     },
     color: {
@@ -277,6 +283,17 @@ function renderProductsProportion(data) {
 //   });
 // }
 
+/*
+===========
+全品項營收比重畫面
+===========
+*/
+function checkOrdersEmpty() {
+  if (ordersListData.length === 0) {
+    proportion.innerHTML = `<h2 class="section-title">目前尚無訂單</h2>`;
+  }
+}
+
 getOrdersList();
 
 /*
@@ -312,7 +329,6 @@ orderList.addEventListener("click", function (e) {
     )
     .then(function (res) {
       getOrdersList();
-      console.log(e.target.dataset.orderDeleteId);
       console.log("訂單刪除成功");
     })
     .catch(function (err) {
@@ -375,16 +391,23 @@ deleteAllOrders.addEventListener("click", function (e) {
 
 orderList.addEventListener("click", function (e) {
   e.preventDefault();
-  if (!e.target.classList.contains("orderPaidState")) {
+  let result;
+  console.log(e.target);
+  if (!e.target.closest(".orderPaidState")) {
     return;
+  } else {
+    result = ordersListData.find(function (item) {
+      return item.id === e.target.dataset.orderPaidId;
+    });
   }
+
   axios
     .put(
       `${base}/api/livejs/v1/admin/${path}/orders`,
       {
         data: {
           id: `${e.target.dataset.orderPaidId}`,
-          paid: true,
+          paid: !result.paid,
         },
       },
       {
@@ -394,10 +417,11 @@ orderList.addEventListener("click", function (e) {
       },
     )
     .then(function (res) {
+      // console.log(res);
       getOrdersList();
-      console.log(res);
+      console.log("訂單狀態更新成功");
     })
     .catch(function (err) {
-      console.log(err);
+      console.log("訂單狀態更新失敗");
     });
 });
